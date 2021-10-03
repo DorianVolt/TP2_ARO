@@ -11,27 +11,32 @@ public class Bag {
 
     private int capacity;
     private int used;
+    private int value;
     private ArrayList<ObjectB> objects;
 
     public Bag(int capacity) {
         this.objects = new ArrayList<>();
         this.capacity = capacity;
         this.used = 0;
+        this.value = 0;
     }
 
-    public void add(ObjectB object) {
+    public int add(ObjectB object) {
         boolean canAdd = used + object.getWeight() <= capacity;
         if (canAdd) {
             used += object.getWeight();
             objects.add(object);
+            value+= object.getValue();
         } else {
-            float multiplactor = 1 / (object.getWeight() / (capacity - used));
+            float multiplactor = (capacity - used)/ (object.getWeight());
             if (multiplactor != 0) {
                 ObjectB objectB = new ObjectB(multiplactor * object.getWeight(), object.getValue() * multiplactor);
                 objects.add(objectB);
                 used += objectB.getWeight();
+                value+= object.getValue();
             }
         }
+        return this.value;
     }
 
     public ArrayList<ObjectB> getObjects() {
@@ -44,6 +49,14 @@ public class Bag {
 
     public int getUsed() {
         return used;
+    }
+
+    public int getValue() {
+        this.value = 0;
+        for (ObjectB object : objects) {
+            value += object.getValue();
+        }
+        return value;
     }
 
     public void display() {
