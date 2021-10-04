@@ -8,6 +8,7 @@ public class Bag {
 
     public static final String RESET = "\u001B[0m";
     public static final String RED = "\u001B[31m";
+    public static final String YELLOW = "\u001B[33m";
 
     private int capacity;
     private int used;
@@ -21,22 +22,21 @@ public class Bag {
         this.value = 0;
     }
 
-    public int add(ObjectB object) {
+    public void add(ObjectB object) {
         boolean canAdd = used + object.getWeight() <= capacity;
         if (canAdd) {
             used += object.getWeight();
             objects.add(object);
-            value+= object.getValue();
+            value += object.getValue();
         } else {
-            float multiplactor = (capacity - used)/ (object.getWeight());
+            float multiplactor = (capacity - used) / (object.getWeight());
             if (multiplactor != 0) {
                 ObjectB objectB = new ObjectB(multiplactor * object.getWeight(), object.getValue() * multiplactor);
                 objects.add(objectB);
                 used += objectB.getWeight();
-                value+= object.getValue();
+                value += object.getValue();
             }
         }
-        return this.value;
     }
 
     public ArrayList<ObjectB> getObjects() {
