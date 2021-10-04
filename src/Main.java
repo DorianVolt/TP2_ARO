@@ -7,8 +7,8 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         List<Integer> expected = List.of(103, 2077672, 2095878, 2132531, 2166542);
-
         Bag bag = new Bag(0);
+
         for (int i = 0; i <= 4; i++) {
             System.out.println("\nResolution sac n°" + i + " : ");
 
@@ -26,10 +26,8 @@ public class Main {
             }
             System.out.println("Capcité du sac : " + bag.getCapacity());
             System.out.println("Poid total: " + poid);
-            System.out.println("Itérations : " + solver.counter + "\n");
+            System.out.println("Itérations : " + solver.iterationCounter + "\n");
         }
-
-
     }
 /*ObjectB O1 = new ObjectB(15,3);
         ObjectB O2 = new ObjectB(20,6);

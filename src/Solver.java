@@ -7,12 +7,11 @@ public class Solver {
 
     public ArrayList<ObjectB> bestItems = new ArrayList<>();
     float optimum = 0;
-    int counter = 0;
+    int iterationCounter = 0;
     private ArrayList<ObjectB> currentIterationItems = new ArrayList<>();
 
-    public static int solve(List<ObjectB> objects, Bag bag) {
-        //sortObjectsByRatio(objects);
-        int value = 0;
+    public int glouton(List<ObjectB> objects, Bag bag) {
+        sortObjectsByRatio(objects);
         for (ObjectB object : objects) {
             bag.add(object);
         }
@@ -24,9 +23,8 @@ public class Solver {
     }
 
 
-    //Q3
     public void Knapsack(int level, float weight, float profit, Bag bag, ArrayList<ObjectB> objects) {
-        counter++;
+        iterationCounter++;
         if (level == objects.size()) {
             if (optimum < profit) {
                 optimum = profit;
@@ -42,7 +40,7 @@ public class Solver {
         List<ObjectB> nextItems = new ArrayList<>(objects);
         nextItems = nextItems.subList(level + 1, objects.size());
         nextItems.addAll(currentIterationItems);
-        if (solve(nextItems, bag) >= optimum) {
+        if (glouton(nextItems, new Bag(bag.getCapacity())) >= optimum) {
             Knapsack(level + 1, weight, profit, bag, objects);
         }
     }
