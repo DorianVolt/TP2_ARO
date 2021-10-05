@@ -23,6 +23,7 @@ public class Solver {
     }
 
 
+    //Inspiré de l'algorithme donné en salle de TP
     public void Knapsack(int level, float weight, float profit, Bag bag, ArrayList<ObjectB> objects) {
         iterationCounter++;
         //Condition d'arret
@@ -40,7 +41,7 @@ public class Solver {
             Knapsack(level + 1, weight + objects.get(level).getWeight(), profit + objects.get(level).getValue(), bag, objects);
             currentIterationItems.remove(currentIterationItems.size() - 1);
         }
-        //On verifie si explorer la branche vaut le coup
+        //On verifie si explorer la branche vaut le coup en calculant les prochains objets de celle ci
         List<ObjectB> nextItems = new ArrayList<>(objects).subList(level + 1, objects.size());
         nextItems.addAll(currentIterationItems);
         if (glouton(nextItems, new Bag(bag.getCapacity())) >= optimum) {
